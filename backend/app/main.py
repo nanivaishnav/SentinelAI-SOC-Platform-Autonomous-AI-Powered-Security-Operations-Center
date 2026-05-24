@@ -1,24 +1,21 @@
-from sqlalchemy import Column
-from sqlalchemy import Integer
-from sqlalchemy import String
-from sqlalchemy import DateTime
-from sqlalchemy import JSON
-
-from datetime import datetime
+from fastapi import FastAPI
 
 from app.core.database import Base
+from app.core.database import engine
+
+from app.models.security_log import SecurityLog
 
 
-class SecurityLog(Base):
+Base.metadata.create_all(bind=engine)
 
-    __tablename__ = "security_logs"
+app = FastAPI(
+    title="SentinelAI SOC Platform",
+    version="1.0.0"
+)
 
-    id = Column(Integer, primary_key=True, index=True)
 
-    source = Column(String)
-    event_type = Column(String)
-    severity = Column(String, default="low")
-
-    raw_log = Column(JSON)
-
-    created_at = Column(DateTime, default=datetime.utcnow)
+@app.get("/")
+async def root():
+    return {
+        "message": "SOC AI Platform Running"
+    }
