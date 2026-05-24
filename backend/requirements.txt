@@ -1,14 +1,15 @@
 fastapi
 uvicorn[standard]
 python-dotenv
+pydantic
+pydantic-settings
 sqlalchemy
 psycopg2-binary
-pydantic
 alembic
 redis
 kafka-python
-pandas
 numpy
+pandas
 scikit-learn
 joblib
 httpx
